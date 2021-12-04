@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="index.css" />
   </head>
   <body>
-    <div>
+    <div class="keys">
       <div data-key="65" class="key">
         <kbd>A</kbd>
         <span class="sound">clap</span>
@@ -56,14 +56,14 @@
     <audio data-key="76" src="sounds/tink.wav"></audio>
 
     <script>
-      function playSound (e) {
+      function playSound(e) {
         const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
         const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
         if (!audio) return; // stop the function from running all together
         audio.currentTime = 0; // rewind it to start
         audio.play();
         key.classList.add("playing");
-      });
+      }
 
       function removeTransition(e) {
         if (e.propertyName !== "transform") return; //skip it if it's not a transform
@@ -72,10 +72,9 @@
 
       const keys = document.querySelectorAll(".key");
       keys.forEach((key) =>
-        key.addEventListener("transitionend", removeTransition);
-      window.addEventListener('keydown', playSound);
-
+        key.addEventListener("transitionend", removeTransition)
       );
+      window.addEventListener("keydown", playSound);
     </script>
   </body>
 </html>
